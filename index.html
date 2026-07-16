@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta content="width=device-width,initial-scale=1.0" name="viewport">
+<title>Paragon Corp. Resources · M365 Copilot Chat Workshop</title>
+<style>
+:root{--radius:12px;--shadow:0 2px 8px rgba(0,0,0,.12);--brand:#1e3a8a;--brand2:#0e7490}
+@media(prefers-color-scheme:dark){:root{--bg:#0b1020;--panel:#0e1633;--panel2:#0a1228;--ink:#e2e8f0;--muted:#94a3b8;--border:#1e2d4a;--sidebar-a:#0e1530;--sidebar-b:#0a0f24;--accent:#3b82f6;--accent2:#60a5fa;--nav-hover:#172244;--badge-bg:#0a0f24;--code:#0d1535;--good:#22c55e;--warn:#f59e0b;--danger:#ef4444;--callout-info:#0e1c2c;--callout-warn:#2b220e;--callout-bad:#2b1414;--callout-good:#0e2418}}
+@media(prefers-color-scheme:light){:root{--bg:#f0f4f8;--panel:#ffffff;--panel2:#f0f6ff;--ink:#1a202c;--muted:#64748b;--border:#d1d9e6;--sidebar-a:#1e3a5f;--sidebar-b:#0f2545;--accent:#2563eb;--accent2:#1d4ed8;--nav-hover:#dbeafe;--badge-bg:#e8f0fe;--code:#1e2b55;--good:#16a34a;--warn:#0e7490;--danger:#dc2626;--callout-info:#eff6ff;--callout-warn:#ecfeff;--callout-bad:#fef2f2;--callout-good:#f0fdf4}}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font:15px/1.55 "Inter","Segoe UI",system-ui,sans-serif;overflow-x:hidden;-webkit-text-size-adjust:100%}
+a{color:var(--accent2);text-decoration:none}a:hover{text-decoration:underline}
+code,pre{font-family:"JetBrains Mono","Consolas",monospace;font-size:13px}
+main{padding:0;max-width:100%}
+.card{background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);padding:22px 24px;margin:14px 0;box-shadow:var(--shadow)}
+.card h3{margin:2px 0 12px;font-size:20px}.card .lead{color:var(--muted);margin:0 0 14px}
+.card h4{margin:18px 0 6px;font-size:15px;color:var(--accent2);text-transform:uppercase;letter-spacing:1px;font-weight:700}
+ul{padding-left:20px;margin:8px 0}li{margin:4px 0}
+.modulehead{display:flex;align-items:center;gap:14px;margin:0 0 12px;padding:14px 4px}
+.modulehead .num{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--brand),var(--accent));display:grid;place-items:center;font-weight:800;font-size:20px;color:#fff;flex:0 0 auto}
+.modulehead h2{margin:0;font-size:22px}.modulehead small{display:block;color:var(--muted);font-size:13px;letter-spacing:1px;text-transform:uppercase}
+.activity{border:1px solid var(--border);border-radius:12px;padding:14px 16px;margin:12px 0;background:var(--panel)}
+.activity .head{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:8px}
+.activity .num{background:var(--accent);color:#fff;font-weight:800;font-size:12px;padding:3px 9px;border-radius:6px}
+.activity .file{font-size:12px;color:var(--accent2);background:var(--badge-bg);border:1px solid var(--border);padding:3px 9px;border-radius:6px}
+.activity h4{margin:0;font-size:16px;color:var(--ink);font-weight:600}
+.activity p{margin:6px 0;color:var(--muted);font-size:14px}
+.activity.bonus{border-left:4px solid var(--brand)}
+.prompt{position:relative;background:var(--code);border:1px solid var(--border);border-left:4px solid var(--brand);border-radius:10px;padding:16px 56px 16px 18px;margin:10px 0;font-family:"JetBrains Mono","Consolas",monospace;font-size:14px;color:#c9d6ff;white-space:pre-wrap;line-height:1.55}
+.prompt .copy{position:absolute;top:8px;right:8px;background:#374151;color:#fff;border:1px solid rgba(255,255,255,.2);border-radius:6px;padding:5px 12px;font-size:12px;cursor:pointer;font-family:inherit;font-weight:600;transition:all .2s}
+.prompt .copy:hover{background:var(--brand);color:#fff}.prompt .copy.copied{background:var(--good);color:#0a0f24}
+.callout{border-left:4px solid var(--accent2);background:var(--callout-info);padding:14px 18px;margin:8px 0 16px;border-radius:8px;color:var(--ink);font-size:15px}
+.callout.warn{border-color:var(--warn);background:var(--callout-warn)}
+.callout.good{border-color:var(--good);background:var(--callout-good)}.callout b{color:var(--ink)}
+table{width:100%;border-collapse:collapse;margin-top:10px;font-size:14px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+th{color:var(--accent2);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.8px}
+td a{color:var(--ink);font-weight:600}td a:hover{color:var(--accent2)}
+.badge{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:5px;letter-spacing:.5px}
+.badge.blue{background:rgba(0,100,200,.2);color:var(--accent2);border:1px solid var(--accent)}
+.badge.yellow{background:rgba(245,158,11,.15);color:var(--warn);border:1px solid var(--warn)}
+.hero{background:radial-gradient(800px 320px at 0% 0%,rgba(30,58,138,.25),transparent 60%),var(--panel);border:1px solid var(--border);border-radius:18px;padding:30px;margin:0 0 18px}
+.hero h2{font-size:26px;margin:0 0 8px;line-height:1.2}
+.hero p{color:var(--muted);margin:0}
+.meta-row{display:flex;flex-wrap:wrap;gap:18px;margin-top:18px;color:var(--muted);font-size:13px}
+.meta-row span b{color:var(--ink)}
+#lock{position:fixed;inset:0;background:radial-gradient(ellipse at 30% 40%,rgba(30,58,138,.5),transparent 60%),#0b1020;z-index:9999;display:flex;align-items:center;justify-content:center}
+.lock-box{background:var(--panel);border:1px solid var(--border);border-radius:20px;padding:40px 44px;max-width:420px;width:90%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.6)}
+.lock-box .blogo{width:56px;height:56px;border-radius:14px;background:var(--brand);display:grid;place-items:center;font-weight:900;font-size:18px;color:#fff;margin:0 auto 18px}
+.lock-box h2{margin:0 0 6px;font-size:22px}.lock-box p{color:var(--muted);font-size:14px;margin:0 0 22px}
+.pw-wrap{position:relative;margin-bottom:12px}
+.lock-box input{width:100%;background:var(--badge-bg);border:1px solid var(--border);border-radius:10px;color:var(--ink);font-size:15px;padding:12px 44px 12px 16px;outline:none;font-family:inherit;transition:border-color .2s}
+.lock-box input:focus{border-color:var(--brand)}
+.pw-toggle{position:absolute!important;right:12px;top:50%;transform:translateY(-50%);background:none!important;border:none!important;width:auto!important;padding:0!important;cursor:pointer;opacity:.7;color:var(--muted)}
+.pw-toggle:hover{background:none!important;opacity:1}
+.pw-toggle svg{width:18px;height:18px;fill:currentColor;display:block}
+.lock-box button{width:100%;background:var(--brand);color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:700;padding:13px;cursor:pointer}
+.lock-box .err{color:var(--danger);font-size:13px;margin-top:8px;min-height:18px}
+.lock-box .conf{font-size:11px;color:var(--muted);margin-top:14px}
+.hero-ihh{background:linear-gradient(135deg,#1e3a8a 0%,#0e7490 100%);color:#fff;padding:36px 32px 56px;position:relative;overflow:hidden}
+.hero-ihh::before{content:'';position:absolute;right:-100px;top:-50px;width:400px;height:400px;background:rgba(255,255,255,.06);border-radius:50%}
+.hero-ihh-inner{max-width:1160px;margin:0 auto;position:relative;z-index:2;padding:0 48px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px}
+.hero-brand-ihh{display:flex;align-items:center;gap:18px}
+.hero-logo-ihh{width:72px;height:72px;background:#fff;border-radius:14px;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 24px rgba(0,0,0,.18);flex-shrink:0;color:#1e3a8a;font-weight:900;font-size:26px;letter-spacing:-1px}
+.hero-brand-ihh h1{margin:0;font-size:13px;font-weight:600;letter-spacing:2px;text-transform:uppercase;opacity:.85;color:#fff}
+.hero-brand-ihh h2{margin:0;font-size:24px;font-weight:700;color:#fff}
+.brand-rule-ihh{width:1px;height:46px;background:rgba(255,255,255,.25)}
+.hero-meta-ihh{font-size:13px;opacity:.9;text-align:right}
+.hero-meta-ihh .pill{display:inline-block;padding:4px 12px;background:rgba(255,255,255,.15);border-radius:12px;margin-left:8px;font-weight:600}
+.hero-title-ihh{max-width:1160px;margin:28px auto 0;position:relative;z-index:2;padding:0 48px}
+.hero-title-ihh h3{margin:0 0 10px;font-size:34px;font-weight:700;line-height:1.2;color:#fff}
+.hero-title-ihh p{margin:0;font-size:16px;opacity:.92;max-width:820px;color:#fff}
+nav.tabs-ihh{background:var(--panel);border-bottom:1px solid var(--border);padding:0;position:sticky;top:0;z-index:50;box-shadow:0 2px 8px rgba(0,0,0,.04);overflow-x:auto}
+nav.tabs-ihh::-webkit-scrollbar{display:none}
+nav.tabs-ihh .tabs-inner{max-width:1160px;margin:0 auto;padding:0 48px;display:flex;flex-wrap:wrap;gap:4px;border-bottom:2px solid var(--border)}
+nav.tabs-ihh .tab{padding:14px 14px;background:transparent;border:none;color:var(--muted);cursor:pointer;font-size:13px;font-weight:600;border-bottom:3px solid transparent;margin-bottom:-2px;display:flex;align-items:center;gap:8px;white-space:nowrap;transition:all .2s;font-family:inherit}
+nav.tabs-ihh .tab:hover{color:var(--ink);background:var(--nav-hover)}
+nav.tabs-ihh .tab.active{color:var(--ink);border-bottom-color:var(--brand2);background:var(--panel)}
+nav.tabs-ihh .tab .tab-num{min-width:24px;height:24px;padding:0 6px;background:var(--border);color:var(--ink);border-radius:12px;display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:700}
+nav.tabs-ihh .tab.active .tab-num{background:var(--brand2);color:#fff}
+.ihh-main{max-width:1160px;margin:0 auto;padding:32px 48px 64px}
+.view-ihh{display:none;animation:fadeInIhh .4s ease}
+.view-ihh.active{display:block}
+@keyframes fadeInIhh{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.lab-nav-ihh{display:flex;justify-content:space-between;align-items:center;margin-top:32px;gap:16px}
+.lab-nav-ihh button{background:var(--brand);color:#fff;border:none;padding:12px 20px;border-radius:8px;cursor:pointer;font-size:14px;font-weight:600;font-family:inherit;transition:background .2s}
+.lab-nav-ihh button:hover{background:var(--accent2)}
+.lab-nav-ihh button.secondary{background:transparent;color:var(--muted);border:1px solid var(--border)}
+.lab-nav-ihh button.secondary:hover{background:var(--nav-hover);color:var(--ink)}
+.lab-nav-ihh button:disabled{opacity:.4;cursor:not-allowed}
+@media(max-width:900px){
+ .hero-ihh{padding:20px 16px 32px}.hero-ihh-inner,.hero-title-ihh{padding:0 16px}
+ .hero-title-ihh h3{font-size:22px}.hero-brand-ihh h2{font-size:18px}
+ nav.tabs-ihh .tabs-inner{padding:0 12px}.ihh-main{padding:18px 16px 50px}
+ .card{padding:16px;border-radius:12px}.card h3{font-size:17px}
+ .prompt{font-size:12.5px;padding:44px 12px 12px;overflow-wrap:anywhere;word-break:break-word}
+ .prompt .copy{top:6px;right:6px}
+ table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}
+ .lock-box{padding:28px 22px;border-radius:16px;max-width:92%}
+ h1,h2,h3,h4{overflow-wrap:anywhere}
+}
+</style></head>
+<body>
+<div id="lock">
+<div class="lock-box">
+<div class="blogo">PR</div>
+<h2>Paragon Corp. · Copilot Resources</h2>
+<p>M365 Copilot Chat Workshop<br>Enter the session password to continue.</p>
+<div class="pw-wrap">
+<input autocomplete="off" id="pw" placeholder="Session password" type="password">
+<button aria-label="Show password" class="pw-toggle" id="pwToggle" onclick="togglePw()" title="Show password" type="button"><svg id="eye-svg" viewBox="0 0 640 512" xmlns="http://www.w3.org/2000/svg"><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c8.4-19.3 10.6-41.4 4.8-63.3c-11.1-41.5-47.8-69.4-88.6-71.1c-5.8-.2-9.2 6.1-7.4 11.7c2.1 6.4 3.3 13.2 3.3 20.3c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zM373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5L373 389.9z"></path></svg></button>
+</div>
+<button type="button" onclick="unlock()">Enter Workshop →</button>
+<div class="err" id="err"></div>
+<div class="conf">Confidential · For workshop use only</div>
+</div>
+</div>
+
+<div id="main" style="display:none">
+<header class="hero-ihh">
+<div class="hero-ihh-inner">
+<div class="hero-brand-ihh">
+<div class="hero-logo-ihh">PR</div>
+<div class="brand-rule-ihh"></div>
+<div>
+<h1>Paragon Corp.</h1>
+<h2>Microsoft 365 Copilot Chat · Workshop Resources</h2>
+</div>
+</div>
+<div class="hero-meta-ihh">
+<div>Workshop Edition · 2026</div>
+<div style="margin-top:6px"><span class="pill">6 Prompt Sections</span></div>
+</div>
+</div>
+<div class="hero-title-ihh">
+<h3>Get started with Copilot Chat — one prompt at a time</h3>
+<p>A friendly, hands-on workshop for Paragon Corp staff who are new to Microsoft 365 Copilot Chat. Work through each tab at your own pace. Every prompt is copy-and-paste ready.</p>
+</div>
+</header>
+
+<nav class="tabs-ihh"><div class="tabs-inner">
+<button type="button" class="tab active" data-view="intro"><span class="tab-num">0</span> Get Started</button>
+<button type="button" class="tab" data-view="files"><span class="tab-num">📁</span> Sample Files</button>
+<button type="button" class="tab" data-view="ex1"><span class="tab-num">1</span> Start the Day (Outlook)</button>
+<button type="button" class="tab" data-view="ex2"><span class="tab-num">2</span> Recap Meeting</button>
+<button type="button" class="tab" data-view="ex3"><span class="tab-num">3</span> Copilot + Word</button>
+<button type="button" class="tab" data-view="ex4"><span class="tab-num">4</span> Copilot + Excel</button>
+<button type="button" class="tab" data-view="ex5"><span class="tab-num">5</span> Copilot + PowerPoint</button>
+<button type="button" class="tab" data-view="ex6"><span class="tab-num">6</span> Create a Poster</button>
+</div></nav>
+
+<div class="ihh-main">
+
+<!-- ============ INTRO ============ -->
+<div class="view-ihh active" id="view-intro">
+<div class="hero">
+<h2>Paragon Corp · M365 Copilot Chat Workshop</h2>
+<p>A practical starter workshop for Paragon Corp staff. In six short sections you'll learn how to use Microsoft 365 Copilot Chat to kick off your day, recap meetings, and create real deliverables in Word, Excel, and PowerPoint — plus a quality poster. No prior experience needed.</p>
+<div class="meta-row">
+<span><b>Audience</b> Paragon Corp staff (beginners)</span>
+<span><b>Format</b> Guided, hands-on</span>
+<span><b>Tool</b> Microsoft 365 Copilot Chat</span>
+</div>
+</div>
+<div class="card">
+<h3>About this workshop</h3>
+<p class="lead">This session is designed for colleagues who are just getting started with Copilot Chat. Each tab gives you a ready-to-use prompt — just copy it, paste it into Copilot, and see what happens. Take your time and experiment.</p>
+<h4>What you'll practice</h4>
+<ul>
+<li>🌅 <b>Start the day</b> — let Copilot in Outlook surface the emails that really need your attention</li>
+<li>📝 <b>Recap a meeting</b> — turn a meeting transcript into clear, concise summaries and action items</li>
+<li>📄 <b>Copilot + Word</b> — generate a formal board brief from your source files</li>
+<li>📊 <b>Copilot + Excel</b> — build a RAG dashboard with KPI tiles, charts, and sparklines</li>
+<li>📑 <b>Copilot + PowerPoint</b> — draft a launch-readiness deck with speaker notes</li>
+<li>🎨 <b>Create a poster</b> — design a quality-culture poster for the manufacturing floor</li>
+</ul>
+<h4>How to use each prompt</h4>
+<ul>
+<li>Open <b>Microsoft 365 Copilot Chat</b> at https://m365.cloud.microsoft/.</li>
+<li>Attach or reference the sample file mentioned in the prompt (use the <code>/</code> or the attach button).</li>
+<li>Click <b>Copy</b> on the prompt, paste it into the chat box, and send.</li>
+<li>Review the result, then ask follow-up questions to refine it.</li>
+</ul>
+<div class="callout warn"><b>A quick note:</b> the sample data is fictional and for practice only. Always review Copilot's output before using it for real work.</div>
+</div>
+<div class="lab-nav-ihh"><button type="button" class="secondary" disabled>← Previous</button><button type="button" data-go="files">Next: Sample Files →</button></div>
+</div>
+
+<!-- ============ SAMPLE FILES ============ -->
+<div class="view-ihh" id="view-files">
+<div class="modulehead"><div class="num">📁</div><h2>Sample files — start here<small>Attach these first, then run the prompts</small></h2></div>
+<div class="card">
+<p class="lead">All data is fictional and for training only. Upload these files to your OneDrive or SharePoint so Copilot can read them, then reference them in the prompts. <b>You'll attach the files and links here at workshop time.</b></p>
+<table>
+<tbody><tr><th>#</th><th>File</th><th>Type</th><th>Used in</th><th>What it contains</th></tr>
+<tr><td>01</td><td>PH_01_Drug_Portfolio.xlsx</td><td><span class="badge blue">Excel</span></td><td>Word · Excel · PowerPoint</td><td>Product portfolio: revenue, gross margin, fill rate, open BPOM queries, market share by product &amp; market</td></tr>
+<tr><td>02</td><td>PH_02_Regulatory_Affairs_Manual.docx</td><td><span class="badge yellow">Word</span></td><td>Word</td><td>Regulatory affairs reference used to ground the BPOM board brief</td></tr>
+<tr><td>03</td><td>PH_03_Clinical_Trials_Protocol.docx</td><td><span class="badge yellow">Word</span></td><td>PowerPoint</td><td>Clinical trial protocol context for the launch-readiness review</td></tr>
+</tbody></table>
+<div class="callout warn" style="margin-top:14px"><b>Why OneDrive / SharePoint?</b> Copilot can only analyse files stored in OneDrive or SharePoint. Files on your local Desktop are not visible to Copilot.</div>
+</div>
+<div class="lab-nav-ihh"><button type="button" class="secondary" data-go="intro">← Get Started</button><button type="button" data-go="ex1">Next: Start the Day →</button></div>
+</div>
+
+<!-- ============ EX1 START THE DAY ============ -->
+<div class="view-ihh" id="view-ex1">
+<div class="modulehead"><div class="num">1</div><h2>Start the day with Copilot in Outlook<small>Copilot Chat · triage your inbox</small></h2></div>
+<div class="callout good"><b>How to start your day in 2 minutes.</b> Open <b>Microsoft 365 Copilot Chat</b> (or Copilot in Outlook), paste the prompt below, and let Copilot find the emails that actually need you.</div>
+<div class="card">
+<p class="lead">Copilot scans your unread email from the last 90 days and hands you a clean, prioritised table — plus ready-to-send draft replies for the ones you need to answer today.</p>
+<div class="activity">
+<div class="head"><span class="num">Prompt 1</span><span class="file">📧 Copilot in Outlook</span></div>
+<h4>Temukan email penting yang butuh perhatian</h4>
+<div class="prompt">Temukan email penting yang belum saya baca (unread) dalam 90 hari terakhir yang kemungkinan besar membutuhkan balasan dari saya. Prioritaskan email di mana saya ada di To/CC, di-mention, atau yang berisi permintaan, tenggat waktu, atau berasal dari pimpinan/pelanggan. Abaikan email otomatis dan newsletter.
+
+Tampilkan hasilnya dalam sebuah tabel dengan kolom berikut:
+- Sender (pengirim)
+- Subject (judul email)
+- Received Time (waktu diterima)
+- Urgency (High / Medium / Low)
+- Ringkasan singkat (1 kalimat)
+- Recommended Action (Reply / Delegate / Ignore)
+
+Urutkan tabel berdasarkan tingkat urgency, dari yang paling tinggi ke paling rendah.
+
+Setelah tabel, untuk setiap email yang direkomendasikan untuk dibalas (Reply) hari ini, buatkan draf balasan singkat yang sopan dan siap kirim. Untuk email yang direkomendasikan didelegasikan atau diabaikan, cukup jelaskan alasannya dalam satu kalimat.
+
+Aturan: gunakan hanya fakta yang ada di email, jangan berspekulasi. Jika tidak ada email yang perlu dibalas, sampaikan: "Saya tidak menemukan email unread yang perlu dibalas."<button type="button" class="copy" onclick="cp(this)">Copy</button></div>
+<div class="callout"><b>Hasil yang diharapkan:</b> satu tabel prioritas berisi pengirim, judul, waktu, tingkat urgensi, ringkasan, dan tindakan yang disarankan — lengkap dengan draf balasan singkat untuk email yang perlu dijawab hari ini.</div>
+</div>
+</div>
+<div class="lab-nav-ihh"><button type="button" class="secondary" data-go="files">← Sample Files</button><button type="button" data-go="ex2">Next: Recap Meeting →</button></div>
+</div>
+
+<!-- ============ EX2 RECAP MEETING ============ -->
+<div class="view-ihh" id="view-ex2">
+<div class="modulehead"><div class="num">2</div><h2>Recap a meeting with clear, concise summaries<small>Copilot Chat · from transcript to action items</small></h2></div>
+<div class="callout good"><b>Turn a long meeting into a short, useful summary.</b> Attach your meeting transcript, then run Prompt 2.1 for the full recap and Prompt 2.2 for a quick executive version.</div>
+<div class="card">
+<h3>2.1 · Full recap with action items</h3>
+<p class="lead">Attach your meeting transcript first, then paste the prompt below.</p>
+<div class="activity">
+<div class="head"><span class="num">Prompt 2.1</span><span class="file">📝 Copilot Chat · recap</span></div>
+<h4>Ringkasan meeting lengkap dari transcript</h4>
+<div class="prompt">Buatkan ringkasan meeting berdasarkan transcript yang saya lampirkan. Sajikan dalam bentuk poin-poin yang mudah dibaca, mencakup:
+- Topik utama yang dibahas
+- Keputusan yang diambil
+- Diskusi penting atau perbedaan pendapat
+
+Setelah itu, buatkan tabel action item dengan kolom:
+- Penanggung jawab (siapa yang bertanggung jawab)
+- Tugas (apa yang harus dilakukan)
+- Timeline (kapan harus selesai)
+
+Aturan: gunakan hanya informasi yang benar-benar disebutkan dalam transcript, jangan menambahkan asumsi. Jika penanggung jawab atau timeline tidak disebutkan, tulis "[perlu dikonfirmasi]". Gunakan gaya bahasa yang faktual, netral, dan ringkas.<button type="button" class="copy" onclick="cp(this)">Copy</button></div>
+</div>
+</div>
+<div class="card">
+<h3>2.2 · Executive short version</h3>
+<div class="activity">
+<div class="head"><span class="num">Prompt 2.2</span><span class="file">📝 Copilot Chat · executive summary</span></div>
+<h4>Versi singkat untuk eksekutif</h4>
+<div class="prompt">Berdasarkan ringkasan meeting di atas, buatkan versi singkat untuk eksekutif. Maksimal 5 poin, masing-masing satu kalimat, yang mencakup hal paling penting: keputusan utama, action item paling kritis, dan risiko atau isu yang perlu perhatian pimpinan. Gunakan bahasa yang langsung ke inti dan mudah dipahami oleh pembaca yang sibuk.<button type="button" class="copy" onclick="cp(this)">Copy</button></div>
+<div class="callout"><b>Tips:</b> jalankan Prompt 2.1 dulu, lalu Prompt 2.2 pada percakapan yang sama supaya Copilot menggunakan ringkasan yang sudah dibuat.</div>
+</div>
+</div>
+<div class="lab-nav-ihh"><button type="button" class="secondary" data-go="ex1">← Start the Day</button><button type="button" data-go="ex3">Next: Copilot + Word →</button></div>
+</div>
+
+<!-- ============ EX3 WORD ============ -->
+<div class="view-ihh" id="view-ex3">
+<div class="modulehead"><div class="num">3</div><h2>Copilot Chat with the Microsoft Word agent<small>Generate a formal board brief</small></h2></div>
+<div class="callout good"><b>From source files to a board-ready document.</b> Open <b>Microsoft 365 Copilot Chat</b>, choose the <b>Word</b> agent, reference the two source files, and paste the prompt below.</div>
+<div class="card">
+<p class="lead">Copilot drafts a 3-page BPOM Launch Readiness Board Brief, grounded on your portfolio data and regulatory manual, and returns a downloadable <code>.docx</code>.</p>
+<div class="activity">
+<div class="head"><span class="num">Prompt 3</span><span class="file">📄 Copilot Chat · Word agent</span></div>
+<h4>Generate the BPOM Launch Readiness Board Brief</h4>
+<div class="prompt">Buatkan dokumen Word sepanjang 3 halaman berjudul "BPOM Launch Readiness Board Brief". Gunakan file PH_01_Drug_Portfolio.xlsx dan PH_02_Regulatory_Affairs_Manual.docx sebagai konteks dan sumber data.
+
+Susun dokumen dengan struktur berikut:
+- Section 1 — Situation Snapshot: gambaran singkat situasi terkini peluncuran produk.
+- Section 2 — Evidence & RAG Status: bukti pendukung beserta status RAG (Red/Amber/Green) untuk tiap area utama.
+- Section 3 — Decisions Required: keputusan yang perlu diambil oleh board.
+- Section 4 — Next 30-Day Actions: rencana aksi 30 hari ke depan lengkap dengan penanggung jawab.
+
+Format sebagai formal board paper, dengan ringkasan RAG (RAG summary) di bagian paling atas dokumen.
+
+Aturan: dasarkan setiap angka pada file sumber, jangan mengarang data. Gunakan [PLACEHOLDER] jika ada informasi yang tidak tersedia di sumber.
+
+Kembalikan hasilnya sebagai file .docx yang bisa diunduh dan siap dibagikan.<button type="button" class="copy" onclick="cp(this)">Copy</button></div>
+<div class="callout warn"><b>Reality check:</b> jika struktur bab kurang tepat, lanjutkan dengan: "Perbaiki agar setiap section memakai heading yang jelas dan pindahkan RAG summary ke halaman pertama."</div>
+</div>
+</div>
+<div class="lab-nav-ihh"><button type="button" class="secondary" data-go="ex2">← Recap Meeting</button><button type="button" data-go="ex4">Next: Copilot + Excel →</button></div>
+</div>
+
+<!-- ============ EX4 EXCEL ============ -->
+<div class="view-ihh" id="view-ex4">
+<div class="modulehead"><div class="num">4</div><h2>Copilot Chat with the Microsoft Excel agent<small>Build a RAG dashboard</small></h2></div>
+<div class="callout good"><b>A dashboard without formulas.</b> Open <b>Microsoft 365 Copilot Chat</b>, choose the <b>Excel</b> agent, reference the portfolio file, and paste the prompt below.</div>
+<div class="card">
+<p class="lead">Copilot creates a new workbook with KPI tiles, a ranked RAG variance view, a trend chart, and a watchlist with weekly sparklines — returned ready to download.</p>
+<div class="activity">
+<div class="head"><span class="num">Prompt 4</span><span class="file">📊 Copilot Chat · Excel agent</span></div>
+<h4>Build the Pharma Portfolio RAG Dashboard</h4>
+<div class="prompt">Buatkan workbook Excel baru bernama Pharma_Portfolio_RAG_Dashboard.xlsx. Gunakan file PH_01_Drug_Portfolio.xlsx sebagai sumber data dan konteks.
+
+Isi dashboard dengan komponen berikut:
+1. KPI Tiles — kartu KPI untuk: product revenue, gross margin, fill rate, open BPOM queries, dan market share.
+2. RAG Variance — daftar produk dan market yang diurutkan (ranked), dengan conditional formatting RAG:
+   - Merah (Red): variance < -20%
+   - Kuning (Amber): variance sekitar -10%
+   - Hijau (Green): variance > 10%
+3. Trend Chart — grafik tren untuk tiap metrik yang berada di bawah tekanan (pressure metric).
+4. Watchlist — daftar pantauan dengan weekly sparklines (grafik mini mingguan).
+
+Sematkan (embed) grafik dan terapkan conditional formatting langsung di dalam workbook.
+
+Aturan: dasarkan seluruh angka pada file sumber, jangan mengarang data. Kembalikan workbook yang siap diunduh.<button type="button" class="copy" onclick="cp(this)">Copy</button></div>
+<div class="callout warn"><b>Reality check:</b> jika ada grafik yang tipenya salah, lanjutkan dengan: "Ubah grafik tren menjadi line chart dan pastikan sparklines mingguan muncul di kolom Watchlist."</div>
+</div>
+</div>
+<div class="lab-nav-ihh"><button type="button" class="secondary" data-go="ex3">← Copilot + Word</button><button type="button" data-go="ex5">Next: Copilot + PowerPoint →</button></div>
+</div>
+
+<!-- ============ EX5 POWERPOINT ============ -->
+<div class="view-ihh" id="view-ex5">
+<div class="modulehead"><div class="num">5</div><h2>Copilot Chat with the Microsoft PowerPoint agent<small>Draft a launch-readiness deck</small></h2></div>
+<div class="callout good"><b>A deck in one prompt.</b> Open <b>Microsoft 365 Copilot Chat</b>, choose the <b>PowerPoint</b> agent, reference the two source files, and paste the prompt below.</div>
+<div class="card">
+<p class="lead">Copilot builds a 7-slide executive deck with a RAG dashboard, changed red risks, a recovery plan, stakeholder messages, and decisions required — plus a chart on slide 2 and speaker notes throughout.</p>
+<div class="activity">
+<div class="head"><span class="num">Prompt 5</span><span class="file">📑 Copilot Chat · PowerPoint agent</span></div>
+<h4>Draft the Pharma Launch Readiness Review deck</h4>
+<div class="prompt">Buatkan deck PowerPoint sebanyak 7 slide berjudul "Pharma Launch Readiness Review". Gunakan file PH_01_Drug_Portfolio.xlsx dan PH_03_Clinical_Trials_Protocol.docx sebagai konteks dan sumber data.
+
+Susun slide dengan urutan berikut:
+- Slide 1 — Executive Summary
+- Slide 2 — RAG Dashboard (sertakan sebuah chart di slide ini)
+- Slide 3 — Changed Red Risks (risiko yang berubah menjadi merah)
+- Slide 4 — Recovery Plan (rencana pemulihan)
+- Slide 5 — Stakeholder Messages (pesan untuk pemangku kepentingan)
+- Slide 6 — Decisions Required (keputusan yang dibutuhkan)
+- Slide 7 — Appendix / sumber data
+
+Gunakan tema executive yang rapi dan profesional. Tambahkan speaker notes di setiap slide.
+
+Aturan: dasarkan seluruh angka pada file sumber, jangan mengarang data. Gunakan [PLACEHOLDER] untuk informasi yang tidak tersedia.
+
+Kembalikan hasilnya sebagai file Pharma_Launch_Readiness_Review.pptx yang siap diunduh.<button type="button" class="copy" onclick="cp(this)">Copy</button></div>
+<div class="callout warn"><b>Reality check:</b> jika slide 2 belum ada grafiknya, lanjutkan dengan: "Tambahkan chart RAG di slide 2 dan pastikan speaker notes terisi di semua slide."</div>
+</div>
+</div>
+<div class="lab-nav-ihh"><button type="button" class="secondary" data-go="ex4">← Copilot + Excel</button><button type="button" data-go="ex6">Next: Create a Poster →</button></div>
+</div>
+
+<!-- ============ EX6 POSTER ============ -->
+<div class="view-ihh" id="view-ex6">
+<div class="modulehead"><div class="num">6</div><h2>Create a poster with Copilot<small>Copilot Create (Designer) · quality-culture poster</small></h2></div>
+<div class="callout good"><b>The play:</b> use <b>Copilot Create</b> (the Designer feature inside Microsoft 365 Copilot Chat) to generate a polished, brand-aligned poster for the manufacturing floor. Open Copilot Chat, click <b>+</b> → <b>Add capabilities</b> → pick the visual/design capability, then paste the prompt below.</div>
+<div class="card">
+<p class="lead">A high-quality corporate poster for Paragon Corp's body care manufacturing facility, reinforcing a shared quality culture.</p>
+<div class="activity">
+<div class="head"><span class="num">Prompt 6</span><span class="file">🎨 Copilot Create · image output</span></div>
+<h4>Generate the "Quality Starts With Every One of Us" poster</h4>
+<div class="prompt">Buatkan poster korporat berkualitas tinggi untuk fasilitas manufaktur produk body care milik Paragon Corp, dengan tema "Quality Starts With Every One of Us". Poster ini bertujuan memperkuat budaya kualitas di kalangan karyawan manufaktur dan menegaskan tanggung jawab bersama atas keunggulan produk.
+
+Konteks dan elemen visual:
+- Karyawan manufaktur mengenakan APD lengkap (hairnet, masker wajah, sarung tangan, seragam bersih).
+- Fasilitas produksi body care yang modern, bersih, dan sesuai standar GMP.
+- Karyawan sedang melakukan inspeksi kualitas: memeriksa catatan produksi dan memantau standar produk.
+- Produk body care yang melambangkan kualitas dan kepercayaan konsumen.
+- Ikon terkait kualitas: checklist, kaca pembesar, segel kualitas (quality seal), dan indikator pengendalian proses.
+
+Key Messages (tampilkan sebagai poin):
+- Ikuti SOP secara akurat dan konsisten.
+- Lakukan inspeksi kualitas di setiap tahap produksi.
+- Laporkan penyimpangan (deviation) segera.
+- Jaga kebersihan dan perhatian terhadap detail.
+- Setiap karyawan berkontribusi pada kualitas produk.
+
+Slogan: "Every Detail Matters — Your Product Reflects Your Commitment."
+Supporting Statement: "At Paragon Corp, quality is not just a department — it is everyone's responsibility."
+
+Gaya desain: profesional dan inspiratif, estetika manufaktur farmasi/personal care yang modern. Warna dominan biru, putih, dan hijau (melambangkan kepercayaan, kebersihan, dan keunggulan). Tipografi bersih dan mudah dibaca dari papan pengumuman pabrik. Sertakan identitas merek dan nilai-nilai korporat Paragon Corp.
+
+Format: resolusi tinggi, vertikal, ukuran A3. Gaya fotografi realistis dengan pencahayaan yang baik dan keterlibatan karyawan yang positif.
+
+Mood: bangga, disiplin, fokus pada kualitas, dan berkomitmen menghadirkan produk body care yang aman dan berkualitas tinggi.<button type="button" class="copy" onclick="cp(this)">Copy</button></div>
+<div class="callout good"><b>Cara membagikan:</b> klik <b>Download</b> (PNG atau PDF), lalu tempel ke Outlook, Teams, atau cetak untuk papan pengumuman pabrik.</div>
+<div class="callout warn"><b>Tips penyempurnaan:</b> jika ada bagian yang kurang pas, klik <b>Edit</b> dan minta perubahan spesifik, misalnya: "Perbesar judul di bagian atas dan tambahkan logo Paragon Corp di sudut kanan atas."</div>
+</div>
+</div>
+<div class="lab-nav-ihh"><button type="button" class="secondary" data-go="ex5">← Copilot + PowerPoint</button><button type="button" data-go="intro">Back to start ↺</button></div>
+</div>
+
+</div>
+<div style="margin:8px 48px 40px;padding-top:20px;border-top:1px solid var(--border);color:var(--muted);font-size:12px;text-align:center">
+ Paragon Corp · M365 Copilot Chat Workshop · Workshop Edition 2026
+</div>
+</div>
+
+<script>
+try{localStorage.removeItem('unlk');}catch(e){}
+const HASH='c7e9ff6ade563c3d4d913dfb685d27d27c8e1b322525783e1e0667fe0c8dba47';
+async function sha256(s){const b=new TextEncoder().encode(s);const d=await crypto.subtle.digest('SHA-256',b);return Array.from(new Uint8Array(d)).map(x=>x.toString(16).padStart(2,'0')).join('')}
+async function unlock(){
+ const v=document.getElementById('pw').value;
+ const h=await sha256(v);
+ if(h===HASH){
+ document.getElementById('lock').style.display='none';
+ document.getElementById('main').style.display='block';
+ sessionStorage.setItem('unlk','1');
+ }else{
+ const e=document.getElementById('err');e.textContent='Incorrect password. Please try again.';
+ setTimeout(()=>e.textContent='',3000);document.getElementById('pw').value='';
+ }
+}
+if(sessionStorage.getItem('unlk')==='1'){
+ document.getElementById('lock').style.display='none';
+ document.getElementById('main').style.display='block';
+}
+document.getElementById('pw').addEventListener('keydown',e=>{if(e.key==='Enter')unlock();});
+const EYE_OPEN='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256A144 144 0 1 1 144 256a144 144 0 1 1 288 0zM288 192c0 35.3-28.7 64-64 64c-7.1 0-13.9-1.2-20.3-3.3c-5.5-1.8-11.9 1.6-11.7 7.4c.3 6.9 1.3 13.8 3.2 20.7c13.7 51.2 66.4 81.6 117.6 67.9s81.6-66.4 67.9-117.6c-11.1-41.5-47.8-69.4-88.6-71.1c-5.8-.2-9.2 6.1-7.4 11.7c2.1 6.4 3.3 13.2 3.3 20.3z"/></svg>';
+const EYE_OFF='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c8.4-19.3 10.6-41.4 4.8-63.3c-11.1-41.5-47.8-69.4-88.6-71.1c-5.8-.2-9.2 6.1-7.4 11.7c2.1 6.4 3.3 13.2 3.3 20.3c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zM373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5L373 389.9z"/></svg>';
+function togglePw(){
+ const i=document.getElementById('pw'),b=document.getElementById('pwToggle');
+ if(i.type==='password'){i.type='text';b.innerHTML=EYE_OPEN;b.setAttribute('aria-label','Hide password');b.setAttribute('title','Hide password');}
+ else{i.type='password';b.innerHTML=EYE_OFF;b.setAttribute('aria-label','Show password');b.setAttribute('title','Show password');}
+ i.focus();
+}
+function cp(btn){
+ const txt=btn.parentElement.textContent.replace(/Copy$/,'').replace(/Copied!$/,'').trim();
+ navigator.clipboard.writeText(txt).then(()=>{btn.textContent='Copied!';btn.classList.add('copied');setTimeout(()=>{btn.textContent='Copy';btn.classList.remove('copied');},2000);});
+}
+(function(){
+  var tabs=document.querySelectorAll('nav.tabs-ihh .tab');
+  var views=document.querySelectorAll('.view-ihh');
+  function switchView(target){
+    tabs.forEach(function(t){t.classList.toggle('active',t.dataset.view===target);});
+    views.forEach(function(v){v.classList.toggle('active',v.id==='view-'+target);});
+    window.scrollTo({top:0,behavior:'smooth'});
+    try{history.replaceState(null,'','#tab-'+target);}catch(e){}
+  }
+  tabs.forEach(function(t){t.addEventListener('click',function(){switchView(t.dataset.view);});});
+  document.querySelectorAll('[data-go]').forEach(function(b){b.addEventListener('click',function(){switchView(b.dataset.go);});});
+  var h=(location.hash||'').replace('#tab-','');
+  if(h&&document.getElementById('view-'+h))switchView(h);
+})();
+</script>
+</body></html>
