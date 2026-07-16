@@ -50,7 +50,7 @@ td a{color:var(--ink);font-weight:600}td a:hover{color:var(--accent2)}
 .pw-wrap{position:relative;margin-bottom:12px}
 .lock-box input{width:100%;background:var(--badge-bg);border:1px solid var(--border);border-radius:10px;color:var(--ink);font-size:15px;padding:12px 44px 12px 16px;outline:none;font-family:inherit;transition:border-color .2s}
 .lock-box input:focus{border-color:var(--brand)}
- .lock-box input::-ms-reveal,.lock-box input::-ms-clear{display:none}
+.lock-box input::-ms-reveal,.lock-box input::-ms-clear{display:none}
 .lock-box input::-webkit-credentials-auto-fill-button,.lock-box input::-webkit-contacts-auto-fill-button{visibility:hidden;display:none!important;pointer-events:none;position:absolute;right:0}
 .pw-toggle{position:absolute!important;right:12px;top:50%;transform:translateY(-50%);background:none!important;border:none!important;width:auto!important;padding:0!important;cursor:pointer;opacity:.7;color:var(--muted)}
 .pw-toggle:hover{background:none!important;opacity:1}
@@ -105,7 +105,7 @@ nav.tabs-ihh .tab.active .tab-num{background:var(--brand2);color:#fff}
 <div id="lock">
 <div class="lock-box">
 <div class="blogo">PR</div>
-<h2>Paragon Corp. · Copilot Resources</h2>
+<h2>Paragon Corp · Copilot Resources</h2>
 <p>M365 Copilot Chat Workshop<br>Enter the session password to continue.</p>
 <div class="pw-wrap">
 <input autocomplete="off" id="pw" placeholder="Session password" type="password">
@@ -134,8 +134,8 @@ nav.tabs-ihh .tab.active .tab-num{background:var(--brand2);color:#fff}
 </div>
 </div>
 <div class="hero-title-ihh">
-<h3>Get started with Copilot Chat — one prompt at a time</h3>
-<p>A friendly, hands-on workshop for Paragon Corp staff who are new to Microsoft 365 Copilot Chat. Work through each tab at your own pace. Every prompt is copy-and-paste ready.</p>
+<h3>Get started with Copilot Chat</h3>
+<p>A friendly, hands-on workshop for Paragon Corp staff who are new to Microsoft 365 Copilot Chat. <br>Work through each tab at your own pace. Every prompt is copy-and-paste ready.</p>
 </div>
 </header>
 
@@ -191,14 +191,62 @@ nav.tabs-ihh .tab.active .tab-num{background:var(--brand2);color:#fff}
 <div class="view-ihh" id="view-files">
 <div class="modulehead"><div class="num">📁</div><h2>Sample files — start here<small>Attach these first, then run the prompts</small></h2></div>
 <div class="card">
-<p class="lead">All data is fictional and for training only. Upload these files to your OneDrive or SharePoint so Copilot can read them, then reference them in the prompts. <b>You'll attach the files and links here at workshop time.</b></p>
-<table>
-<tbody><tr><th>#</th><th>File</th><th>Type</th><th>Used in</th><th>What it contains</th></tr>
-<tr><td>01</td><td>PH_01_Drug_Portfolio.xlsx</td><td><span class="badge blue">Excel</span></td><td>Word · Excel · PowerPoint</td><td>Product portfolio: revenue, gross margin, fill rate, open BPOM queries, market share by product &amp; market</td></tr>
-<tr><td>02</td><td>PH_02_Regulatory_Affairs_Manual.docx</td><td><span class="badge yellow">Word</span></td><td>Word</td><td>Regulatory affairs reference used to ground the BPOM board brief</td></tr>
-<tr><td>03</td><td>PH_03_Clinical_Trials_Protocol.docx</td><td><span class="badge yellow">Word</span></td><td>PowerPoint</td><td>Clinical trial protocol context for the launch-readiness review</td></tr>
-</tbody></table>
-<div class="callout warn" style="margin-top:14px"><b>Why OneDrive / SharePoint?</b> Copilot can only analyse files stored in OneDrive or SharePoint. Files on your local Desktop are not visible to Copilot.</div>
+
+    <p class="lead">
+        Download sample files below and upload them to OneDrive or SharePoint to use as context for Copilot prompts throughout the workshop.
+    </p>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>#</th>
+                <th>File</th>
+                <th>Type</th>
+                <th>Used In</th>
+                <th>Contains</th>
+            </tr>
+
+            <tr>
+    <td>01</td>
+    <td>
+        <a href="https://v-mmustaqim.github.io/ParagonCorp2026/PH_01_Drug_Portfolio.xlsx">
+          PH_01_Drug_Portfolio.xlsx </a>
+    </td>
+    <td><span class="badge blue">Excel</span></td>
+    <td>Word · Excel · PowerPoint</td>
+    <td>Product portfolio: revenue, gross margin, fill rate, open BPOM queries, market share by product & market.</td>
+</tr>
+
+<tr>
+    <td>02</td>
+    <td>
+        <a href="https://v-mmustaqim.github.io/ParagonCorp2026/PH_02_Regulatory_Affairs_Manual.docx">
+           PH_02_Regulatory_Affairs_Manual  <td><span class="badge yellow">Word</span></td>
+    <td>Word</td>
+    <td>Regulatory affairs reference supporting BPOM Launch Readiness Board Brief.</td>
+</tr>
+
+<tr>
+    <td>03</td>
+    <td>
+        <a href="https://v-mmustaqim.github.io/ParagonCorp2026/PH_03_Clinical_Trials.docx">
+          PH_03_Clinical_Trials_Protocol.docx
+        </a>
+    </td>
+    <td><span class="badge yellow">Word</span></td>
+    <td>PowerPoint</td>
+    <td>Clinical trial protocol context for launch-readiness review.</td>
+</tr>
+        </tbody>
+    </table>
+<br>
+    <div class="callout good" style="margin-top:14px">
+        <b>Before starting:</b><br>
+        After downloading the files, upload them to OneDrive first.<br>
+        Copilot works best when files are stored in Microsoft 365 and accessible through your account.
+    </div>
+
+
 </div>
 <div class="lab-nav-ihh"><button type="button" class="secondary" data-go="intro">← Get Started</button><button type="button" data-go="ex1">Next: Start the Day →</button></div>
 </div>
