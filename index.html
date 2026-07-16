@@ -50,6 +50,8 @@ td a{color:var(--ink);font-weight:600}td a:hover{color:var(--accent2)}
 .pw-wrap{position:relative;margin-bottom:12px}
 .lock-box input{width:100%;background:var(--badge-bg);border:1px solid var(--border);border-radius:10px;color:var(--ink);font-size:15px;padding:12px 44px 12px 16px;outline:none;font-family:inherit;transition:border-color .2s}
 .lock-box input:focus{border-color:var(--brand)}
+ .lock-box input::-ms-reveal,.lock-box input::-ms-clear{display:none}
+.lock-box input::-webkit-credentials-auto-fill-button,.lock-box input::-webkit-contacts-auto-fill-button{visibility:hidden;display:none!important;pointer-events:none;position:absolute;right:0}
 .pw-toggle{position:absolute!important;right:12px;top:50%;transform:translateY(-50%);background:none!important;border:none!important;width:auto!important;padding:0!important;cursor:pointer;opacity:.7;color:var(--muted)}
 .pw-toggle:hover{background:none!important;opacity:1}
 .pw-toggle svg{width:18px;height:18px;fill:currentColor;display:block}
